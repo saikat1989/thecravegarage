@@ -152,17 +152,17 @@
 </div>
 
 <nav class="cat-nav" id="catNav">
-  <button class="cat-btn active" onclick="scrollTo('all')">All</button>
-  <button class="cat-btn" onclick="scrollTo('maggi')">Maggi</button>
-  <button class="cat-btn" onclick="scrollTo('waiwai')">Wai Wai</button>
-  <button class="cat-btn" onclick="scrollTo('millet')">Millet Bowls</button>
-  <button class="cat-btn" onclick="scrollTo('pasta')">Pasta</button>
-  <button class="cat-btn" onclick="scrollTo('salad')">Salad</button>
-  <button class="cat-btn" onclick="scrollTo('omlette')">Omelette</button>
-  <button class="cat-btn" onclick="scrollTo('nuggets')">Nuggets</button>
-  <button class="cat-btn" onclick="scrollTo('pancake')">Pan Cakes</button>
-  <button class="cat-btn" onclick="scrollTo('shakes')">AI Shakes</button>
-  <button class="cat-btn" onclick="scrollTo('beverages')">Beverages</button>
+  <button class="cat-btn active" onclick="scrollToSection('all',this)">All</button>
+  <button class="cat-btn" onclick="scrollToSection('maggi',this)">Maggi</button>
+  <button class="cat-btn" onclick="scrollToSection('waiwai',this)">Wai Wai</button>
+  <button class="cat-btn" onclick="scrollToSection('millet',this)">Millet Bowls</button>
+  <button class="cat-btn" onclick="scrollToSection('pasta',this)">Pasta</button>
+  <button class="cat-btn" onclick="scrollToSection('salad',this)">Salad</button>
+  <button class="cat-btn" onclick="scrollToSection('omlette',this)">Omelette</button>
+  <button class="cat-btn" onclick="scrollToSection('nuggets',this)">Nuggets</button>
+  <button class="cat-btn" onclick="scrollToSection('pancake',this)">Pan Cakes</button>
+  <button class="cat-btn" onclick="scrollToSection('shakes',this)">AI Shakes</button>
+  <button class="cat-btn" onclick="scrollToSection('beverages',this)">Beverages</button>
 </nav>
 
 <div class="menu-wrap">
@@ -297,9 +297,9 @@
 </a>
 
 <script>
-function scrollTo(id) {
+function scrollToSection(id, btn) {
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  btn.classList.add('active');
   if (id === 'all') { window.scrollTo({top:0,behavior:'smooth'}); return; }
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
