@@ -1,11 +1,309 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>The Crave Garage</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Crave Garage – Cloud Kitchen Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand: #E84C1E;
+    --brand-dark: #c03c12;
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --surface2: #242424;
+    --text: #f2f0eb;
+    --muted: #888;
+    --border: rgba(255,255,255,0.08);
+    --green: #4CAF50;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+  /* HEADER */
+  header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; color: var(--brand); }
+  .logo span { color: var(--text); }
+  .whatsapp-btn {
+    background: #25D366; color: #fff; border: none; border-radius: 8px;
+    padding: 8px 16px; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 14px;
+    cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 6px;
+  }
+  .whatsapp-btn:hover { background: #1ebe5a; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1a0a05 0%, #0f0f0f 60%);
+    padding: 3rem 1.5rem 2rem;
+    border-bottom: 2px solid var(--brand);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: 'CRAVE';
+    position: absolute; right: -10px; top: -20px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 10rem;
+    color: rgba(232,76,30,0.05); pointer-events: none; line-height: 1;
+  }
+  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 8vw, 5rem); letter-spacing: 3px; line-height: 1; }
+  .hero h1 em { color: var(--brand); font-style: normal; }
+  .hero p { color: var(--muted); margin-top: 0.5rem; font-size: 15px; }
+  .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1rem; }
+  .tag { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--muted); }
+  .tag.hot { border-color: var(--brand); color: var(--brand); }
+
+  /* CATEGORY NAV */
+  .cat-nav {
+    display: flex; gap: 8px; overflow-x: auto; padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border); background: var(--bg);
+    position: sticky; top: 64px; z-index: 90;
+    scrollbar-width: none;
+  }
+  .cat-nav::-webkit-scrollbar { display: none; }
+  .cat-btn {
+    background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+    border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 500;
+    cursor: pointer; white-space: nowrap; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .cat-btn:hover, .cat-btn.active { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+  /* MENU */
+  .menu-wrap { padding: 1.5rem; max-width: 900px; margin: 0 auto; }
+
+  .category-section { margin-bottom: 2.5rem; }
+  .category-section h2 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px;
+    color: var(--brand); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .category-section h2 span { font-size: 1rem; color: var(--muted); font-family: 'DM Sans', sans-serif; font-weight: 400; letter-spacing: 0; }
+
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+
+  .menu-item {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; display: flex; justify-content: space-between; align-items: flex-start;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .menu-item:hover { border-color: rgba(232,76,30,0.4); background: var(--surface2); }
+  .item-info { flex: 1; }
+  .item-name { font-size: 14px; font-weight: 500; line-height: 1.4; }
+  .item-veg { display: inline-block; width: 10px; height: 10px; border: 1.5px solid var(--green); border-radius: 50%; margin-right: 6px; vertical-align: middle; position: relative; }
+  .item-veg::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 5px; height: 5px; background: var(--green); border-radius: 50%; }
+  .item-nonveg { display: inline-block; width: 10px; height: 10px; border: 1.5px solid var(--brand); border-radius: 50%; margin-right: 6px; vertical-align: middle; position: relative; }
+  .item-nonveg::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 5px; height: 5px; background: var(--brand); border-radius: 50%; }
+  .item-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--brand); white-space: nowrap; margin-left: 12px; line-height: 1.2; }
+  .item-price small { font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--muted); display: block; font-weight: 400; text-align: right; }
+
+  /* FOOTER */
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    text-align: center; padding: 2rem 1.5rem;
+    color: var(--muted); font-size: 13px;
+  }
+  footer a { color: var(--brand); text-decoration: none; }
+
+  /* FLOATING WA */
+  .wa-float {
+    position: fixed; bottom: 24px; right: 24px; z-index: 200;
+    background: #25D366; color: #fff; border-radius: 50px;
+    padding: 12px 20px; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 14px;
+    text-decoration: none; display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.3); transition: transform 0.2s;
+  }
+  .wa-float:hover { transform: scale(1.05); }
+  .wa-float svg { width: 20px; height: 20px; }
+
+  @media (max-width: 600px) {
+    .menu-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .menu-item { padding: 10px 12px; }
+    .item-name { font-size: 13px; }
+  }
+</style>
 </head>
 <body>
-    <h1>The Crave Garage</h1>
-    <h2>Coming Soon</h2>
-    <p>Where Cravings Get Fixed</p>
+
+<header>
+  <div class="logo">THE CRAVE <span>GARAGE</span></div>
+  <a class="whatsapp-btn" href="https://wa.me/91XXXXXXXXXX?text=Hi%2C%20I%27d%20like%20to%20order%20from%20The%20Crave%20Garage" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Order on WhatsApp
+  </a>
+</header>
+
+<div class="hero">
+  <h1>FOOD THAT<br>HITS <em>DIFFERENT</em></h1>
+  <p>Cloud Kitchen • Hyderabad • Home Delivery</p>
+  <div class="hero-tags">
+    <div class="tag hot">🔥 Maggi Specials</div>
+    <div class="tag hot">💪 AI Shakes</div>
+    <div class="tag">Millet Options</div>
+    <div class="tag">Veg &amp; Non-Veg</div>
+    <div class="tag">₹75 onwards</div>
+  </div>
+</div>
+
+<nav class="cat-nav" id="catNav">
+  <button class="cat-btn active" onclick="scrollTo('all')">All</button>
+  <button class="cat-btn" onclick="scrollTo('maggi')">Maggi</button>
+  <button class="cat-btn" onclick="scrollTo('waiwai')">Wai Wai</button>
+  <button class="cat-btn" onclick="scrollTo('millet')">Millet Bowls</button>
+  <button class="cat-btn" onclick="scrollTo('pasta')">Pasta</button>
+  <button class="cat-btn" onclick="scrollTo('salad')">Salad</button>
+  <button class="cat-btn" onclick="scrollTo('omlette')">Omelette</button>
+  <button class="cat-btn" onclick="scrollTo('nuggets')">Nuggets</button>
+  <button class="cat-btn" onclick="scrollTo('pancake')">Pan Cakes</button>
+  <button class="cat-btn" onclick="scrollTo('shakes')">AI Shakes</button>
+  <button class="cat-btn" onclick="scrollTo('beverages')">Beverages</button>
+</nav>
+
+<div class="menu-wrap">
+
+  <section class="category-section" id="maggi">
+    <h2>🍜 Maggi <span>8 items</span></h2>
+    <div class="menu-grid">
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Classic Veg Maggi (Regular)</span></div><div class="item-price">₹100<small>Regular</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Classic Veg Maggi (Wheat)</span></div><div class="item-price">₹120<small>Wheat</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Egg Maggi (Regular)</span></div><div class="item-price">₹120<small>Regular</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Egg Maggi (Wheat)</span></div><div class="item-price">₹140<small>Wheat</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Garrage Chicken Maggi (Regular)</span></div><div class="item-price">₹150<small>Regular</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Garrage Chicken Maggi (Wheat)</span></div><div class="item-price">₹170<small>Wheat</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Garrage Loaded Maggi (Regular)</span></div><div class="item-price">₹180<small>Regular</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Garrage Loaded Maggi (Wheat)</span></div><div class="item-price">₹200<small>Wheat</small></div></div>
+    </div>
+  </section>
+
+  <section class="category-section" id="waiwai">
+    <h2>🍜 Wai Wai <span>8 items</span></h2>
+    <div class="menu-grid">
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Classic Wai Wai (Regular)</span></div><div class="item-price">₹100<small>Regular</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Classic Wai Wai (Wheat)</span></div><div class="item-price">₹120<small>Wheat</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Egg Wai Wai (Regular)</span></div><div class="item-price">₹120<small>Regular</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Egg Wai Wai (Wheat)</span></div><div class="item-price">₹140<small>Wheat</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Garrage Chicken Wai Wai (Regular)</span></div><div class="item-price">₹150<small>Regular</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Garrage Chicken Wai Wai (Wheat)</span></div><div class="item-price">₹170<small>Wheat</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Garrage Loaded Wai Wai (Regular)</span></div><div class="item-price">₹180<small>Regular</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Garrage Loaded Wai Wai (Wheat)</span></div><div class="item-price">₹200<small>Wheat</small></div></div>
+    </div>
+  </section>
+
+  <section class="category-section" id="millet">
+    <h2>🌾 Millet Bowls <span>4 items</span></h2>
+    <div class="menu-grid">
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Veg Millet Bowl</span></div><div class="item-price">₹200</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Egg Millet Bowl</span></div><div class="item-price">₹320</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Chicken Millet Bowl</span></div><div class="item-price">₹240</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Garrage Special Millet Bowl</span></div><div class="item-price">₹260</div></div>
+    </div>
+  </section>
+
+  <section class="category-section" id="pasta">
+    <h2>🍝 Pasta <span>8 items</span></h2>
+    <div class="menu-grid">
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Veg White Sauce Pasta (Regular)</span></div><div class="item-price">₹150<small>Regular</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Veg White Sauce Pasta (Millet)</span></div><div class="item-price">₹180<small>Millet</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Veg Red Sauce Pasta (Regular)</span></div><div class="item-price">₹150<small>Regular</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Veg Red Sauce Pasta (Millet)</span></div><div class="item-price">₹150<small>Millet</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Chicken White Sauce Pasta (Regular)</span></div><div class="item-price">₹200<small>Regular</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Chicken White Sauce Pasta (Millet)</span></div><div class="item-price">₹200<small>Millet</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Chicken Red Sauce Pasta (Regular)</span></div><div class="item-price">₹200<small>Regular</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Chicken Red Sauce Pasta (Millet)</span></div><div class="item-price">₹200<small>Millet</small></div></div>
+    </div>
+  </section>
+
+  <section class="category-section" id="salad">
+    <h2>🥗 Salad <span>3 items</span></h2>
+    <div class="menu-grid">
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Egg Salad</span></div><div class="item-price">₹100</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Chicken Salad</span></div><div class="item-price">₹150</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Paneer Salad</span></div><div class="item-price">₹150</div></div>
+    </div>
+  </section>
+
+  <section class="category-section" id="omlette">
+    <h2>🍳 Omelette <span>4 items</span></h2>
+    <div class="menu-grid">
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Masala Omelette</span></div><div class="item-price">₹100</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Cheese Omelette</span></div><div class="item-price">₹150</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Chicken Omelette</span></div><div class="item-price">₹170</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Egg White Omelette</span></div><div class="item-price">₹150</div></div>
+    </div>
+  </section>
+
+  <section class="category-section" id="nuggets">
+    <h2>🍗 Nuggets <span>3 items</span></h2>
+    <div class="menu-grid">
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Veg Nuggets</span></div><div class="item-price">₹150</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Chicken Nuggets</span></div><div class="item-price">₹250</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-nonveg"></span><span class="item-name">Chicken Cheese Nuggets</span></div><div class="item-price">₹350</div></div>
+    </div>
+  </section>
+
+  <section class="category-section" id="pancake">
+    <h2>🥞 Pan Cakes <span>4 items</span></h2>
+    <div class="menu-grid">
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Banana Pan Cake</span></div><div class="item-price">₹75</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Chocolate Pan Cake</span></div><div class="item-price">₹100</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Oats Pan Cake</span></div><div class="item-price">₹75</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Ragi Pan Cake</span></div><div class="item-price">₹75</div></div>
+    </div>
+  </section>
+
+  <section class="category-section" id="shakes">
+    <h2>💪 AI Shakes <span>6 items</span></h2>
+    <div class="menu-grid">
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">AI Lean Shake</span></div><div class="item-price">₹150</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">AI Muscle Boost Shake</span></div><div class="item-price">₹300</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">AI Daily Energy Shake</span></div><div class="item-price">₹230</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">AI Immunity Power Shake</span></div><div class="item-price">₹150</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">AI Kids Growth Shake</span></div><div class="item-price">₹200</div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">AI Senior Wellness Shake</span></div><div class="item-price">₹150</div></div>
+    </div>
+  </section>
+
+  <section class="category-section" id="beverages">
+    <h2>☕ Beverages <span>9 items</span></h2>
+    <div class="menu-grid">
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Hot Coffee</span></div><div class="item-price">₹125<small>Hot</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Tea</span></div><div class="item-price">₹80<small>Hot</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Cold Coffee</span></div><div class="item-price">₹170<small>Cold</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Ice Filter Coffee</span></div><div class="item-price">₹150<small>Cold</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Mint Mojito</span></div><div class="item-price">₹100<small>Cold</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Fresh Lime Mojito</span></div><div class="item-price">₹100<small>Cold</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Fresh Lime Soda</span></div><div class="item-price">₹100<small>Cold</small></div></div>
+      <div class="menu-item"><div class="item-info"><span class="item-veg"></span><span class="item-name">Cold Drinks (Packaged)</span></div><div class="item-price">₹30<small>Cold</small></div></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:#E84C1E;margin-bottom:6px;">THE CRAVE GARAGE</p>
+  <p>Cloud Kitchen · <a href="http://thecravegarage.in">thecravegarage.in</a></p>
+  <p style="margin-top:6px;">🟢 Veg &nbsp;|&nbsp; 🔴 Non-Veg</p>
+</footer>
+
+<a class="wa-float" href="https://wa.me/91XXXXXXXXXX?text=Hi%2C%20I%27d%20like%20to%20order%20from%20The%20Crave%20Garage" target="_blank">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  Order Now
+</a>
+
+<script>
+function scrollTo(id) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  if (id === 'all') { window.scrollTo({top:0,behavior:'smooth'}); return; }
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+</script>
 </body>
 </html>
