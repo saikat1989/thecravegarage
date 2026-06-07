@@ -3,373 +3,309 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Crave Garage – Cloud Kitchen</title>
+<title>The Crave Garage – Fix Your Cravings Here</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --fire: #FF3D00;
-  --fire2: #FF6D00;
+  --fire: #FF6A00;
+  --fire2: #FF8C00;
   --gold: #FFB300;
-  --bg: #111010;
-  --bg2: #181716;
-  --bg3: #201e1d;
+  --bg: #0f0e0d;
+  --bg2: #181614;
+  --bg3: #201d1b;
   --text: #F5F0E8;
   --muted: #7a736a;
-  --border: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
   --green: #56C568;
   --red: #FF3D00;
   --radius: 6px;
 }
-
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Barlow',sans-serif;
-  min-height:100vh;
-  overflow-x:hidden;
-}
-
-/* TEXTURE OVERLAY */
-body::before{
-  content:'';
-  position:fixed;top:0;left:0;right:0;bottom:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23000'/%3E%3Crect width='1' height='1' x='0' y='0' fill='%23ffffff08'/%3E%3Crect width='1' height='1' x='2' y='2' fill='%23ffffff04'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:0;
-}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;overflow-x:hidden}
 
 /* HEADER */
 header{
   position:sticky;top:0;z-index:200;
-  background:rgba(17,16,16,0.96);
+  background:rgba(15,14,13,0.97);
   backdrop-filter:blur(12px);
   border-bottom:2px solid var(--fire);
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 1.5rem;height:60px;
+  padding:0 1.25rem;height:58px;
+  gap:10px;
 }
-.logo-wrap{display:flex;align-items:center;gap:10px}
-.logo-icon{
-  width:36px;height:36px;
-  background:var(--fire);
-  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:#fff;
-  letter-spacing:0;
+.logo-img{height:42px;width:42px;object-fit:contain;flex-shrink:0}
+.brand-name{
+  font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--text);line-height:1.1;
+  flex:1;
 }
-.logo-text{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:3px;color:var(--text)}
-.logo-text span{color:var(--fire)}
+.brand-name span{color:var(--fire);display:block}
+.brand-tag{font-size:9px;letter-spacing:1.5px;color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-weight:600}
 .order-btn{
   background:var(--fire);color:#fff;
   border:none;border-radius:4px;
-  padding:8px 16px;
-  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;
+  padding:8px 14px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;
   letter-spacing:1px;text-transform:uppercase;
   cursor:pointer;text-decoration:none;
-  display:flex;align-items:center;gap:6px;
-  transition:background 0.15s,transform 0.15s;
+  display:flex;align-items:center;gap:5px;flex-shrink:0;
+  transition:background 0.15s;
 }
-.order-btn:hover{background:var(--fire2);transform:translateY(-1px)}
+.order-btn:hover{background:var(--fire2)}
+.order-btn svg{width:15px;height:15px}
 
-/* HERO */
-.hero{
-  position:relative;overflow:hidden;
-  padding:4rem 2rem 3rem;
-  background: linear-gradient(160deg,#1c1008 0%,#111010 55%,#0d0d10 100%);
-  border-bottom:1px solid var(--border);
+/* BANNER */
+.hero-banner{
+  width:100%;display:block;
+  aspect-ratio:16/5;object-fit:cover;
+  max-height:320px;
 }
-.hero-bg-text{
-  position:absolute;right:-20px;top:-30px;
-  font-family:'Oswald',sans-serif;font-size:clamp(100px,22vw,220px);font-weight:700;
-  color:rgba(255,61,0,0.04);line-height:1;pointer-events:none;letter-spacing:-5px;
-  user-select:none;
+@media(max-width:600px){
+  .hero-banner{aspect-ratio:16/9;max-height:220px}
 }
-.hero-eyebrow{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:13px;font-weight:600;letter-spacing:4px;text-transform:uppercase;
-  color:var(--fire);margin-bottom:1rem;display:flex;align-items:center;gap:10px;
-}
-.hero-eyebrow::before{content:'';display:block;width:30px;height:2px;background:var(--fire)}
-.hero h1{
-  font-family:'Oswald',sans-serif;
-  font-size:clamp(3rem,10vw,6.5rem);
-  font-weight:700;line-height:0.95;
-  letter-spacing:-1px;text-transform:uppercase;
-}
-.hero h1 .line2{
-  -webkit-text-stroke:1.5px var(--fire);
-  color:transparent;
-  display:block;
-}
-.hero h1 .line3{color:var(--gold);display:block}
-.hero-sub{
-  color:var(--muted);font-size:15px;margin-top:1.2rem;
-  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-}
-.hero-sub span{display:flex;align-items:center;gap:5px}
-.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.5rem}
-.pill{
-  border:1px solid rgba(255,61,0,0.3);
-  border-radius:2px;padding:4px 10px;
-  font-family:'Barlow Condensed',sans-serif;font-size:12px;
-  font-weight:600;letter-spacing:1px;text-transform:uppercase;
-  color:var(--muted);
-}
-.pill.hot{border-color:var(--fire);color:var(--fire)}
-.pill.gold{border-color:var(--gold);color:var(--gold)}
 
-/* PRICING NOTE */
+/* PRICE NOTE */
 .price-note{
-  background:rgba(255,179,0,0.08);border:1px solid rgba(255,179,0,0.2);
-  padding:10px 16px;margin:0 1.5rem;
-  font-size:12px;color:#b8a070;letter-spacing:0.3px;
+  background:rgba(255,106,0,0.08);border-bottom:1px solid rgba(255,106,0,0.15);
+  padding:9px 1.25rem;
+  font-family:'Barlow Condensed',sans-serif;font-size:13px;
+  font-weight:600;letter-spacing:0.5px;color:#c47a3a;
   display:flex;align-items:center;gap:8px;
-  border-radius:var(--radius);
 }
 
 /* CATEGORY NAV */
 .cat-nav{
-  position:sticky;top:60px;z-index:180;
-  background:rgba(17,16,16,0.97);backdrop-filter:blur(8px);
+  position:sticky;top:58px;z-index:180;
+  background:rgba(15,14,13,0.97);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--border);
   display:flex;gap:4px;overflow-x:auto;
-  padding:10px 1.5rem;scrollbar-width:none;
+  padding:9px 1.25rem;scrollbar-width:none;
 }
 .cat-nav::-webkit-scrollbar{display:none}
 .cat-btn{
-  background:transparent;
-  border:1px solid var(--border);
-  border-radius:2px;
-  color:var(--muted);
-  padding:5px 14px;
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
-  cursor:pointer;white-space:nowrap;
+  background:transparent;border:1px solid var(--border);border-radius:2px;
+  color:var(--muted);padding:5px 13px;
+  font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;white-space:nowrap;
   transition:all 0.15s;
 }
 .cat-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2)}
 .cat-btn.active{background:var(--fire);color:#fff;border-color:var(--fire)}
 
 /* MAIN */
-main{max-width:1000px;margin:0 auto;padding:2rem 1.5rem 4rem}
+main{max-width:1000px;margin:0 auto;padding:1.5rem 1.25rem 4rem}
 
-/* SECTION HEADER */
+/* SECTION */
 .section-head{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  margin-bottom:1rem;padding-bottom:10px;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:0.85rem;padding-bottom:8px;
   border-bottom:1px solid var(--border);
 }
 .section-head h2{
   font-family:'Oswald',sans-serif;
-  font-size:clamp(1.5rem,5vw,2.2rem);
+  font-size:clamp(1.3rem,4vw,1.9rem);
   font-weight:600;letter-spacing:2px;text-transform:uppercase;
-  display:flex;align-items:center;gap:12px;
+  display:flex;align-items:center;gap:10px;
 }
-.section-head h2 .emoji{font-size:1.4rem}
 .section-head .count{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:12px;font-weight:600;letter-spacing:2px;
-  text-transform:uppercase;color:var(--muted);
-  padding-bottom:4px;
+  font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);
 }
+.menu-section{margin-bottom:2.5rem}
 
-/* MENU SECTION */
-.menu-section{margin-bottom:3rem}
-
-/* ITEM CARD */
+/* GRID */
 .items-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
   gap:8px;
 }
+
+/* CARD */
 .item-card{
-  background:var(--bg2);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:14px 16px;
-  display:flex;flex-direction:column;gap:6px;
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:12px 14px;display:flex;flex-direction:column;gap:5px;
   transition:border-color 0.2s,background 0.2s,transform 0.15s;
-  cursor:default;position:relative;overflow:hidden;
+  position:relative;overflow:hidden;
 }
 .item-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,rgba(255,61,0,0.4),transparent);
+  background:linear-gradient(90deg,transparent,rgba(255,106,0,0.5),transparent);
   opacity:0;transition:opacity 0.2s;
 }
-.item-card:hover{
-  border-color:rgba(255,61,0,0.35);
-  background:var(--bg3);
-  transform:translateY(-1px);
-}
+.item-card:hover{border-color:rgba(255,106,0,0.4);background:var(--bg3);transform:translateY(-1px)}
 .item-card:hover::before{opacity:1}
 
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.item-name{
-  font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;
-  line-height:1.35;flex:1;
-}
-.price-block{text-align:right;flex-shrink:0}
+.item-name{font-size:14px;font-weight:600;line-height:1.35;flex:1}
+
+/* Price — just the final price, clean */
 .price-final{
-  font-family:'Oswald',sans-serif;font-size:1.25rem;font-weight:600;
-  color:var(--fire);line-height:1;
+  font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:600;
+  color:var(--fire);white-space:nowrap;flex-shrink:0;
 }
-.price-base{
-  font-size:10px;color:var(--muted);
-  margin-top:1px;
+
+.card-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:3px;
 }
-.price-gst{
-  font-size:10px;color:var(--muted);
-}
-.item-desc{
-  font-size:12px;color:var(--muted);line-height:1.5;
-  font-style:italic;
-}
-.card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:2px}
-.veg-badge{
-  display:flex;align-items:center;gap:5px;
-  font-size:11px;font-weight:600;letter-spacing:0.5px;
-  text-transform:uppercase;
-}
-.dot{
-  width:9px;height:9px;border-radius:50%;
-  border:1.5px solid;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-}
-.dot::after{
-  content:'';width:4px;height:4px;border-radius:50%;
-}
-.dot.veg{border-color:var(--green)}
-.dot.veg::after{background:var(--green)}
-.dot.nonveg{border-color:var(--red)}
-.dot.nonveg::after{background:var(--red)}
-.veg-badge.veg{color:var(--green)}
-.veg-badge.nonveg{color:var(--red)}
+.veg-badge{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:0.3px;text-transform:uppercase}
+.dot{width:9px;height:9px;border-radius:50%;border:1.5px solid;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.dot::after{content:'';width:4px;height:4px;border-radius:50%}
+.dot.veg{border-color:var(--green)}.dot.veg::after{background:var(--green)}
+.dot.nonveg{border-color:var(--red)}.dot.nonveg::after{background:var(--red)}
+.veg-badge.veg{color:var(--green)}.veg-badge.nonveg{color:var(--red)}
 
 .tag-badge{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
-  border-radius:2px;padding:2px 6px;
+  font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;border-radius:2px;padding:2px 6px;
 }
 .tag-badge.wheat{background:rgba(255,179,0,0.12);color:var(--gold)}
 .tag-badge.millet{background:rgba(86,197,104,0.1);color:#7dd98a}
-.tag-badge.loaded{background:rgba(255,61,0,0.12);color:var(--fire)}
+.tag-badge.loaded{background:rgba(255,106,0,0.12);color:var(--fire)}
+.tag-badge.cold{background:rgba(60,130,200,0.12);color:#7aabdd}
+.tag-badge.hot{background:rgba(180,80,0,0.15);color:#d4813a}
 
-/* AI SHAKES — special cards */
-.shake-card{
-  background:linear-gradient(135deg,#1a1510 0%,#181716 100%);
-  border-color:rgba(255,179,0,0.15);
+
+.item-desc{
+  font-size:12px;color:var(--muted);line-height:1.5;font-style:italic;
 }
-.shake-card:hover{border-color:rgba(255,179,0,0.4)}
+
+
+/* AI SHAKE cards */
+.shake-card{background:linear-gradient(135deg,#1a1510 0%,#181614 100%);border-color:rgba(255,179,0,0.12)}
+.shake-card:hover{border-color:rgba(255,179,0,0.35)}
 .shake-card .price-final{color:var(--gold)}
 .shake-best{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:11px;font-weight:600;letter-spacing:0.5px;
-  color:var(--gold);
-  background:rgba(255,179,0,0.1);
-  border-radius:2px;padding:3px 8px;margin-top:4px;display:inline-block;
+  font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.5px;
+  color:var(--gold);background:rgba(255,179,0,0.1);border-radius:2px;
+  padding:3px 7px;display:inline-block;margin-top:2px;
 }
+/* show shake desc always since it's key info */
+.shake-card .item-desc{display:block}
 
 /* DIVIDER */
-.garage-divider{
-  display:flex;align-items:center;gap:12px;
-  margin:2rem 0;opacity:0.3;
-}
-.garage-divider::before,.garage-divider::after{
-  content:'';flex:1;height:1px;background:var(--fire);
-}
-.garage-divider span{
-  font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:3px;
-  color:var(--fire);
-}
+.garage-divider{display:flex;align-items:center;gap:10px;margin:2rem 0;opacity:0.25}
+.garage-divider::before,.garage-divider::after{content:'';flex:1;height:1px;background:var(--fire)}
+.garage-divider span{font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:3px;color:var(--fire)}
 
 /* FLOATING WA */
 .wa-float{
-  position:fixed;bottom:20px;right:20px;z-index:300;
-  background:#25D366;color:#fff;
-  border-radius:50px;padding:11px 18px;
-  font-family:'Barlow Condensed',sans-serif;font-weight:700;
-  font-size:15px;letter-spacing:1px;text-transform:uppercase;
-  text-decoration:none;display:flex;align-items:center;gap:8px;
-  box-shadow:0 4px 24px rgba(37,211,102,0.35);
-  transition:transform 0.2s,box-shadow 0.2s;
+  position:fixed;bottom:18px;right:16px;z-index:300;
+  background:#25D366;color:#fff;border-radius:50px;
+  padding:10px 16px;font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;
+  text-decoration:none;display:flex;align-items:center;gap:7px;
+  box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:transform 0.2s;
 }
-.wa-float:hover{transform:scale(1.06);box-shadow:0 6px 30px rgba(37,211,102,0.45)}
-.wa-float svg{width:18px;height:18px;flex-shrink:0}
+.wa-float:hover{transform:scale(1.05)}
+.wa-float svg{width:17px;height:17px;flex-shrink:0}
 
 /* FOOTER */
 footer{
-  background:var(--bg2);border-top:1px solid var(--border);
-  padding:2.5rem 1.5rem;text-align:center;
+  background:var(--bg2);
+  border-top:2px solid var(--fire);
+  padding:0;
 }
-.footer-logo{
-  font-family:'Oswald',sans-serif;font-size:1.8rem;font-weight:700;
-  letter-spacing:4px;text-transform:uppercase;color:var(--fire);
-  margin-bottom:4px;
+.footer-top{
+  max-width:1000px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:0;
 }
-footer p{color:var(--muted);font-size:13px}
-footer a{color:var(--fire);text-decoration:none}
-.legend{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:12px;font-size:12px;color:var(--muted)}
+@media(max-width:640px){
+  .footer-top{grid-template-columns:1fr}
+}
+.footer-col{
+  padding:1.5rem 1.25rem;
+  border-right:1px solid var(--border);
+}
+.footer-col:last-child{border-right:none}
+@media(max-width:640px){
+  .footer-col{border-right:none;border-bottom:1px solid var(--border)}
+  .footer-col:last-child{border-bottom:none}
+}
+.footer-col h4{
+  font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;color:var(--fire);
+  margin-bottom:12px;
+}
+.footer-brand{
+  display:flex;align-items:center;gap:10px;margin-bottom:10px;
+}
+.footer-logo-img{width:44px;height:44px;object-fit:contain}
+.footer-brand-text{font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:2px;line-height:1.1}
+.footer-brand-text span{color:var(--fire)}
+.footer-tagline{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:8px}
+.fssai-box{
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:4px;padding:7px 10px;font-size:11px;color:var(--muted);
+  line-height:1.5;
+}
+.fssai-box strong{color:var(--text);font-size:12px}
 
-/* MOBILE */
+.social-links{display:flex;flex-direction:column;gap:8px}
+.social-link{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;color:var(--muted);font-size:13px;font-weight:500;
+  padding:7px 10px;border-radius:4px;border:1px solid var(--border);
+  transition:all 0.15s;
+}
+.social-link:hover{color:var(--text);border-color:var(--fire);background:rgba(255,106,0,0.06)}
+.social-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ig-icon{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.fb-icon{background:#1877f2}
+.gb-icon{background:#fff;border:1px solid #ddd}
+.wa-icon{background:#25D366}
+
+.contact-list{display:flex;flex-direction:column;gap:10px}
+.contact-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);line-height:1.4}
+.contact-item .ci{font-size:18px;flex-shrink:0;margin-top:-1px}
+.contact-item a{color:var(--muted);text-decoration:none}
+.contact-item a:hover{color:var(--fire)}
+.contact-item strong{color:var(--text);display:block;font-size:12px;margin-bottom:1px}
+
+.footer-bottom{
+  border-top:1px solid var(--border);
+  padding:12px 1.25rem;text-align:center;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.legend{display:flex;align-items:center;gap:14px;font-size:11px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:5px}
+.l-dot{width:8px;height:8px;border-radius:50%}
+.footer-copy{font-size:11px;color:var(--muted)}
+
+/* Mobile grid */
 @media(max-width:600px){
-  .items-grid{grid-template-columns:1fr 1fr;gap:6px}
+  .items-grid{grid-template-columns:1fr;gap:6px}
   .item-card{padding:10px 12px}
-  .item-name{font-size:12px}
-  .item-desc{display:none}
+  .item-name{font-size:13px}
   .price-final{font-size:1.1rem}
-  .hero{padding:2.5rem 1rem 2rem}
-  main{padding:1.5rem 1rem 4rem}
-  .price-note{margin:0 1rem}
-  .cat-nav{padding:8px 1rem}
 }
-
-/* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.menu-section{animation:fadeUp 0.4s ease both}
-.menu-section:nth-child(1){animation-delay:0.05s}
-.menu-section:nth-child(2){animation-delay:0.1s}
-.menu-section:nth-child(3){animation-delay:0.15s}
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="logo-wrap">
-    <div class="logo-icon">CG</div>
-    <div class="logo-text">THE CRAVE <span>GARAGE</span></div>
+  <img class="logo-img" src="WhiteLogo_WithoutText.png" alt="The Crave Garage Logo" onerror="this.style.display='none'">
+  <div class="brand-name">
+    The Crave <span>Garage</span>
+    <div class="brand-tag">Fix Your Cravings Here</div>
   </div>
-  <a class="order-btn" href="https://wa.me/91XXXXXXXXXX?text=Hi%2C%20I%27d%20like%20to%20order%20from%20The%20Crave%20Garage!" target="_blank">
-    <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    Order Now
+  <a class="order-btn" href="https://wa.me/91XXXXXXXXXX?text=Hi%2C%20I'd%20like%20to%20order%20from%20The%20Crave%20Garage!" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Order
   </a>
 </header>
 
-<section class="hero">
-  <div class="hero-bg-text">CRAVE</div>
-  <div class="hero-eyebrow">Cloud Kitchen · Est. 2024</div>
-  <h1>
-    FOOD THAT<br>
-    <span class="line2">HITS</span>
-    <span class="line3">DIFFERENT.</span>
-  </h1>
-  <div class="hero-sub">
-    <span>🍜 Noodles & Bowls</span>
-    <span>💪 AI Nutrition Shakes</span>
-    <span>🌾 Millet Options</span>
-  </div>
-  <div class="hero-pills">
-    <div class="pill hot">🔥 Garrage Specials</div>
-    <div class="pill gold">💪 AI Shakes</div>
-    <div class="pill">Veg & Non-Veg</div>
-    <div class="pill">From ₹75</div>
-  </div>
-</section>
+<!-- BANNER -->
+<img class="hero-banner" src="Banner.png" alt="The Crave Garage – Fix Your Cravings Here">
 
-<div class="price-note" style="margin-top:12px">
-  ⚡ All prices shown are inclusive of GST. Base price + applicable GST (5%/12%) displayed on each item.
-</div>
+<!-- PRICE NOTE -->
+<div class="price-note">⚡ All prices are inclusive of GST</div>
 
+<!-- CATEGORY NAV -->
 <nav class="cat-nav" id="catNav">
   <button class="cat-btn active" onclick="scrollToSection('top',this)">All</button>
   <button class="cat-btn" onclick="scrollToSection('maggi',this)">Maggi</button>
@@ -388,445 +324,245 @@ footer a{color:var(--fire);text-decoration:none}
 
 <!-- MAGGI -->
 <section class="menu-section" id="maggi">
-  <div class="section-head">
-    <h2><span class="emoji">🍜</span> Maggi</h2>
-    <span class="count">8 items</span>
-  </div>
+  <div class="section-head"><h2><span>🍜</span> Maggi</h2><span class="count">8 items</span></div>
   <div class="items-grid">
-    <div class="item-card">
-      <div class="card-top">
-        <div class="item-name">Classic Veg Maggi</div>
-        <div class="price-block"><div class="price-final">₹105</div><div class="price-base">Base ₹100 + GST ₹5</div></div>
-      </div>
-      <div class="item-desc">Classic Maggi loaded with fresh onion & capsicum, cooked in flavorful masala just the way you like it.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge">Regular</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top">
-        <div class="item-name">Classic Veg Maggi</div>
-        <div class="price-block"><div class="price-final">₹126</div><div class="price-base">Base ₹120 + GST ₹6</div></div>
-      </div>
-      <div class="item-desc">Classic Wheat Maggi loaded with fresh onion & capsicum, cooked in flavorful masala just the way you like it.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge wheat">Wheat</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top">
-        <div class="item-name">Egg Maggi</div>
-        <div class="price-block"><div class="price-final">₹126</div><div class="price-base">Base ₹120 + GST ₹6</div></div>
-      </div>
-      <div class="item-desc">Comforting Maggi tossed with egg, onion & capsicum for a delicious protein-packed twist.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge">Regular</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top">
-        <div class="item-name">Egg Maggi</div>
-        <div class="price-block"><div class="price-final">₹147</div><div class="price-base">Base ₹140 + GST ₹7</div></div>
-      </div>
-      <div class="item-desc">Comforting Wheat Maggi tossed with egg, onion & capsicum for a delicious protein-packed twist.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge wheat">Wheat</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top">
-        <div class="item-name">Garrage Chicken Maggi</div>
-        <div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div>
-      </div>
-      <div class="item-desc">Hot and flavorful Maggi loaded with juicy chicken, onion & capsicum for the perfect comfort bowl.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge">Regular</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top">
-        <div class="item-name">Garrage Chicken Maggi</div>
-        <div class="price-block"><div class="price-final">₹178.50</div><div class="price-base">Base ₹170 + GST ₹8.50</div></div>
-      </div>
-      <div class="item-desc">Hot and flavorful Wheat Maggi loaded with juicy chicken, onion & capsicum for the perfect comfort bowl.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge wheat">Wheat</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top">
-        <div class="item-name">Garrage Loaded Maggi</div>
-        <div class="price-block"><div class="price-final">₹189</div><div class="price-base">Base ₹180 + GST ₹9</div></div>
-      </div>
-      <div class="item-desc">Customize your favorite Maggi with toppings, sauces and protein of your choice.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge loaded">Loaded</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top">
-        <div class="item-name">Garrage Loaded Maggi</div>
-        <div class="price-block"><div class="price-final">₹210</div><div class="price-base">Base ₹200 + GST ₹10</div></div>
-      </div>
-      <div class="item-desc">Customize your favorite Wheat Maggi with toppings, sauces and protein of your choice.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge wheat">Wheat · Loaded</span></div>
-    </div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Classic Veg Maggi</div><div class="price-final">₹105</div></div><div class="item-desc">Classic Maggi loaded with fresh onion & capsicum, cooked in flavorful masala just the way you like it.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge">Regular</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Classic Veg Maggi</div><div class="price-final">₹126</div></div><div class="item-desc">Classic Wheat Maggi loaded with fresh onion & capsicum, cooked in flavorful masala just the way you like it.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge wheat">Wheat</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Egg Maggi</div><div class="price-final">₹126</div></div><div class="item-desc">Comforting Maggi tossed with egg, onion & capsicum for a delicious protein-packed twist.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge">Regular</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Egg Maggi</div><div class="price-final">₹147</div></div><div class="item-desc">Comforting Wheat Maggi tossed with egg, onion & capsicum for a delicious protein-packed twist.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge wheat">Wheat</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Garrage Chicken Maggi</div><div class="price-final">₹157.50</div></div><div class="item-desc">Hot and flavorful Maggi loaded with juicy chicken, onion & capsicum for the perfect comfort bowl.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge">Regular</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Garrage Chicken Maggi</div><div class="price-final">₹178.50</div></div><div class="item-desc">Hot and flavorful Wheat Maggi loaded with juicy chicken, onion & capsicum for the perfect comfort bowl.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge wheat">Wheat</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Garrage Loaded Maggi</div><div class="price-final">₹189</div></div><div class="item-desc">Customize your favorite Maggi with toppings, sauces and protein of your choice.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge loaded">Loaded</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Garrage Loaded Maggi</div><div class="price-final">₹210</div></div><div class="item-desc">Customize your favorite Wheat Maggi with toppings, sauces and protein of your choice.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge wheat">Wheat · Loaded</span></div></div>
   </div>
 </section>
-
 <div class="garage-divider"><span>///</span></div>
 
 <!-- WAI WAI -->
 <section class="menu-section" id="waiwai">
-  <div class="section-head">
-    <h2><span class="emoji">🍜</span> Wai Wai</h2>
-    <span class="count">8 items</span>
-  </div>
+  <div class="section-head"><h2><span>🍜</span> Wai Wai</h2><span class="count">8 items</span></div>
   <div class="items-grid">
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Classic Wai Wai</div><div class="price-block"><div class="price-final">₹105</div><div class="price-base">Base ₹100 + GST ₹5</div></div></div>
-      <div class="item-desc">Delicious Wai Wai noodles cooked with fresh onion & capsicum in flavorful seasoning.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge">Regular</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Classic Wai Wai</div><div class="price-block"><div class="price-final">₹134.40</div><div class="price-base">Base ₹120 + GST ₹14.40</div></div></div>
-      <div class="item-desc">Delicious Wheat Wai Wai noodles cooked with fresh onion & capsicum in flavorful seasoning.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge wheat">Wheat</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Egg Wai Wai</div><div class="price-block"><div class="price-final">₹134.40</div><div class="price-base">Base ₹120 + GST ₹14.40</div></div></div>
-      <div class="item-desc">Flavorful Wai Wai noodles tossed with egg, onion & capsicum for a satisfying bite.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge">Regular</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Egg Wai Wai</div><div class="price-block"><div class="price-final">₹147</div><div class="price-base">Base ₹140 + GST ₹7</div></div></div>
-      <div class="item-desc">Flavorful Wheat Wai Wai noodles tossed with egg, onion & capsicum for a satisfying bite.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge wheat">Wheat</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Garrage Chicken Wai Wai</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">Juicy chicken, onion & capsicum mixed with delicious Wai Wai noodles for ultimate comfort food.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge">Regular</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Garrage Chicken Wai Wai</div><div class="price-block"><div class="price-final">₹178.50</div><div class="price-base">Base ₹170 + GST ₹8.50</div></div></div>
-      <div class="item-desc">Juicy chicken, onion & capsicum mixed with delicious Wheat Wai Wai noodles for ultimate comfort food.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge wheat">Wheat</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Garrage Loaded Wai Wai</div><div class="price-block"><div class="price-final">₹189</div><div class="price-base">Base ₹180 + GST ₹9</div></div></div>
-      <div class="item-desc">Build your perfect Wai Wai bowl with toppings, sauces and add-ons of your choice.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge loaded">Loaded</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Garrage Loaded Wai Wai</div><div class="price-block"><div class="price-final">₹210</div><div class="price-base">Base ₹200 + GST ₹10</div></div></div>
-      <div class="item-desc">Build your perfect Wheat Wai Wai bowl with toppings, sauces and add-ons of your choice.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge wheat">Wheat · Loaded</span></div>
-    </div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Classic Wai Wai</div><div class="price-final">₹105</div></div><div class="item-desc">Delicious Wai Wai noodles cooked with fresh onion & capsicum in flavorful seasoning.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge">Regular</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Classic Wai Wai</div><div class="price-final">₹134.40</div></div><div class="item-desc">Delicious Wheat Wai Wai noodles cooked with fresh onion & capsicum in flavorful seasoning.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge wheat">Wheat</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Egg Wai Wai</div><div class="price-final">₹134.40</div></div><div class="item-desc">Flavorful Wai Wai noodles tossed with egg, onion & capsicum for a satisfying bite.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge">Regular</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Egg Wai Wai</div><div class="price-final">₹147</div></div><div class="item-desc">Flavorful Wheat Wai Wai noodles tossed with egg, onion & capsicum for a satisfying bite.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge wheat">Wheat</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Garrage Chicken Wai Wai</div><div class="price-final">₹157.50</div></div><div class="item-desc">Juicy chicken, onion & capsicum mixed with delicious Wai Wai noodles for ultimate comfort food.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge">Regular</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Garrage Chicken Wai Wai</div><div class="price-final">₹178.50</div></div><div class="item-desc">Juicy chicken, onion & capsicum mixed with delicious Wheat Wai Wai noodles for ultimate comfort food.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge wheat">Wheat</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Garrage Loaded Wai Wai</div><div class="price-final">₹189</div></div><div class="item-desc">Build your perfect Wai Wai bowl with toppings, sauces and add-ons of your choice.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge loaded">Loaded</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Garrage Loaded Wai Wai</div><div class="price-final">₹210</div></div><div class="item-desc">Build your perfect Wheat Wai Wai bowl with toppings, sauces and add-ons of your choice.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge wheat">Wheat · Loaded</span></div></div>
   </div>
 </section>
-
 <div class="garage-divider"><span>///</span></div>
 
 <!-- MILLET -->
 <section class="menu-section" id="millet">
-  <div class="section-head">
-    <h2><span class="emoji">🌾</span> Millet Noodles</h2>
-    <span class="count">4 items</span>
-  </div>
+  <div class="section-head"><h2><span>🌾</span> Millet Noodles</h2><span class="count">4 items</span></div>
   <div class="items-grid">
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Veg Millet Noodles</div><div class="price-block"><div class="price-final">₹210</div><div class="price-base">Base ₹200 + GST ₹10</div></div></div>
-      <div class="item-desc">Healthy millet noodles cooked with fresh veggies for a light yet flavorful meal.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge millet">Millet</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Egg Millet Noodles</div><div class="price-block"><div class="price-final">₹336</div><div class="price-base">Base ₹320 + GST ₹16</div></div></div>
-      <div class="item-desc">Nutritious millet noodles paired with egg and fresh veggies for a protein boost.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge millet">Millet</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Chicken Millet Noodles</div><div class="price-block"><div class="price-final">₹252</div><div class="price-base">Base ₹240 + GST ₹12</div></div></div>
-      <div class="item-desc">Healthy millet noodles loaded with juicy chicken and fresh vegetables.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge millet">Millet</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Garrage Special Millet Noodles</div><div class="price-block"><div class="price-final">₹273</div><div class="price-base">Base ₹260 + GST ₹13</div></div></div>
-      <div class="item-desc">Customize your healthy noodle bowl exactly the way you like it.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge loaded">Special</span></div>
-    </div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Veg Millet Noodles</div><div class="price-final">₹210</div></div><div class="item-desc">Healthy millet noodles cooked with fresh veggies for a light yet flavorful meal.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge millet">Millet</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Egg Millet Noodles</div><div class="price-final">₹336</div></div><div class="item-desc">Nutritious millet noodles paired with egg and fresh veggies for a protein boost.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge millet">Millet</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Chicken Millet Noodles</div><div class="price-final">₹252</div></div><div class="item-desc">Healthy millet noodles loaded with juicy chicken and fresh vegetables.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge millet">Millet</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Garrage Special Millet Noodles</div><div class="price-final">₹273</div></div><div class="item-desc">Customize your healthy noodle bowl exactly the way you like it.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge loaded">Special</span></div></div>
   </div>
 </section>
-
 <div class="garage-divider"><span>///</span></div>
 
 <!-- PASTA -->
 <section class="menu-section" id="pasta">
-  <div class="section-head">
-    <h2><span class="emoji">🍝</span> Pasta</h2>
-    <span class="count">8 items</span>
-  </div>
+  <div class="section-head"><h2><span>🍝</span> Pasta</h2><span class="count">8 items</span></div>
   <div class="items-grid">
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Veg White Sauce Pasta</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">Creamy white sauce wheat pasta loaded with veggies, herbs and cheesy goodness.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge">Regular</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Veg White Sauce Pasta</div><div class="price-block"><div class="price-final">₹189</div><div class="price-base">Base ₹180 + GST ₹9</div></div></div>
-      <div class="item-desc">Creamy white sauce millet pasta loaded with veggies, herbs and cheesy goodness.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge millet">Millet</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Veg Red Sauce Pasta</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">Perfectly cooked wheat pasta tossed in rich red sauce with fresh veggies and herbs.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge">Regular</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Veg Red Sauce Pasta</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">Perfectly cooked millet pasta tossed in rich red sauce with fresh veggies and herbs.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge millet">Millet</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Chicken White Sauce Pasta</div><div class="price-block"><div class="price-final">₹210</div><div class="price-base">Base ₹200 + GST ₹10</div></div></div>
-      <div class="item-desc">Creamy white sauce wheat pasta loaded with juicy chicken, herbs and cheesy flavors.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge">Regular</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Chicken White Sauce Pasta</div><div class="price-block"><div class="price-final">₹210</div><div class="price-base">Base ₹200 + GST ₹10</div></div></div>
-      <div class="item-desc">Creamy white sauce millet pasta loaded with juicy chicken, herbs and cheesy flavors.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge millet">Millet</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Chicken Red Sauce Pasta</div><div class="price-block"><div class="price-final">₹210</div><div class="price-base">Base ₹200 + GST ₹10</div></div></div>
-      <div class="item-desc">Flavorful chicken wheat pasta tossed in rich red sauce with herbs and veggies.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge">Regular</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Chicken Red Sauce Pasta</div><div class="price-block"><div class="price-final">₹210</div><div class="price-base">Base ₹200 + GST ₹10</div></div></div>
-      <div class="item-desc">Flavorful chicken millet pasta tossed in rich red sauce with herbs and veggies.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge millet">Millet</span></div>
-    </div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Veg White Sauce Pasta</div><div class="price-final">₹157.50</div></div><div class="item-desc">Creamy white sauce wheat pasta loaded with veggies, herbs and cheesy goodness.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge">Regular</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Veg White Sauce Pasta</div><div class="price-final">₹189</div></div><div class="item-desc">Creamy white sauce millet pasta loaded with veggies, herbs and cheesy goodness.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge millet">Millet</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Veg Red Sauce Pasta</div><div class="price-final">₹157.50</div></div><div class="item-desc">Perfectly cooked wheat pasta tossed in rich red sauce with fresh veggies and herbs.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge">Regular</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Veg Red Sauce Pasta</div><div class="price-final">₹157.50</div></div><div class="item-desc">Perfectly cooked millet pasta tossed in rich red sauce with fresh veggies and herbs.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge millet">Millet</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Chicken White Sauce Pasta</div><div class="price-final">₹210</div></div><div class="item-desc">Creamy white sauce wheat pasta loaded with juicy chicken, herbs and cheesy flavors.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge">Regular</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Chicken White Sauce Pasta</div><div class="price-final">₹210</div></div><div class="item-desc">Creamy white sauce millet pasta loaded with juicy chicken, herbs and cheesy flavors.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge millet">Millet</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Chicken Red Sauce Pasta</div><div class="price-final">₹210</div></div><div class="item-desc">Flavorful chicken wheat pasta tossed in rich red sauce with herbs and veggies.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge">Regular</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Chicken Red Sauce Pasta</div><div class="price-final">₹210</div></div><div class="item-desc">Flavorful chicken millet pasta tossed in rich red sauce with herbs and veggies.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div><span class="tag-badge millet">Millet</span></div></div>
   </div>
 </section>
-
 <div class="garage-divider"><span>///</span></div>
 
 <!-- SALAD -->
 <section class="menu-section" id="salad">
-  <div class="section-head">
-    <h2><span class="emoji">🥗</span> Salad</h2>
-    <span class="count">3 items</span>
-  </div>
+  <div class="section-head"><h2><span>🥗</span> Salad</h2><span class="count">3 items</span></div>
   <div class="items-grid">
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Egg Salad</div><div class="price-block"><div class="price-final">₹105</div><div class="price-base">Base ₹100 + GST ₹5</div></div></div>
-      <div class="item-desc">Fresh and healthy salad loaded with egg, crunchy veggies and creamy dressing.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Chicken Salad</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">Juicy chicken tossed with fresh crunchy veggies and creamy dressing for a healthy bite.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Paneer Salad</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">Fresh veggies mixed with soft paneer and creamy dressing for a wholesome meal.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div>
-    </div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Egg Salad</div><div class="price-final">₹105</div></div><div class="item-desc">Fresh and healthy salad loaded with egg, crunchy veggies and creamy dressing.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Chicken Salad</div><div class="price-final">₹157.50</div></div><div class="item-desc">Juicy chicken tossed with fresh crunchy veggies and creamy dressing for a healthy bite.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Paneer Salad</div><div class="price-final">₹157.50</div></div><div class="item-desc">Fresh veggies mixed with soft paneer and creamy dressing for a wholesome meal.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div></div>
   </div>
 </section>
-
 <div class="garage-divider"><span>///</span></div>
 
 <!-- OMLETTE -->
 <section class="menu-section" id="omlette">
-  <div class="section-head">
-    <h2><span class="emoji">🍳</span> Omelette</h2>
-    <span class="count">4 items</span>
-  </div>
+  <div class="section-head"><h2><span>🍳</span> Omelette</h2><span class="count">4 items</span></div>
   <div class="items-grid">
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Masala Omelette</div><div class="price-block"><div class="price-final">₹105</div><div class="price-base">Base ₹100 + GST ₹5</div></div></div>
-      <div class="item-desc">Fresh omelette loaded with onion, coriander and mild spices for a homestyle flavor.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Cheese Omelette</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">Fluffy omelette loaded with melted cheese for a rich and satisfying bite.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Chicken Omelette</div><div class="price-block"><div class="price-final">₹178.50</div><div class="price-base">Base ₹170 + GST ₹8.50</div></div></div>
-      <div class="item-desc">Protein-packed omelette loaded with juicy chicken and fresh veggies.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Egg White Omelette</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">Light and protein-rich egg white omelette with fresh veggies for a healthier choice.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div>
-    </div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Masala Omelette</div><div class="price-final">₹105</div></div><div class="item-desc">Fresh omelette loaded with onion, coriander and mild spices for a homestyle flavor.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Cheese Omelette</div><div class="price-final">₹157.50</div></div><div class="item-desc">Fluffy omelette loaded with melted cheese for a rich and satisfying bite.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Chicken Omelette</div><div class="price-final">₹178.50</div></div><div class="item-desc">Protein-packed omelette loaded with juicy chicken and fresh veggies.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Egg White Omelette</div><div class="price-final">₹157.50</div></div><div class="item-desc">Light and protein-rich egg white omelette with fresh veggies for a healthier choice.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div></div>
   </div>
 </section>
-
 <div class="garage-divider"><span>///</span></div>
 
 <!-- NUGGETS -->
 <section class="menu-section" id="nuggets">
-  <div class="section-head">
-    <h2><span class="emoji">🍗</span> Nuggets</h2>
-    <span class="count">3 items</span>
-  </div>
+  <div class="section-head"><h2><span>🍗</span> Nuggets</h2><span class="count">3 items</span></div>
   <div class="items-grid">
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Veg Nuggets</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">Crispy and delicious veggie nuggets, perfectly golden and full of flavor.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Chicken Nuggets</div><div class="price-block"><div class="price-final">₹262.50</div><div class="price-base">Base ₹250 + GST ₹12.50</div></div></div>
-      <div class="item-desc">Crispy golden chicken nuggets served hot for the perfect crunchy bite.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Chicken Cheese Nuggets</div><div class="price-block"><div class="price-final">₹367.50</div><div class="price-base">Base ₹350 + GST ₹17.50</div></div></div>
-      <div class="item-desc">Juicy chicken nuggets stuffed with cheesy goodness for an irresistible snack.</div>
-      <div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div>
-    </div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Veg Nuggets</div><div class="price-final">₹157.50</div></div><div class="item-desc">Crispy and delicious veggie nuggets, perfectly golden and full of flavor.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Chicken Nuggets</div><div class="price-final">₹262.50</div></div><div class="item-desc">Crispy golden chicken nuggets served hot for the perfect crunchy bite.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Chicken Cheese Nuggets</div><div class="price-final">₹367.50</div></div><div class="item-desc">Juicy chicken nuggets stuffed with cheesy goodness for an irresistible snack.</div><div class="card-footer"><div class="veg-badge nonveg"><div class="dot nonveg"></div>Non-Veg</div></div></div>
   </div>
 </section>
-
 <div class="garage-divider"><span>///</span></div>
 
-<!-- PAN CAKE -->
+<!-- PAN CAKES -->
 <section class="menu-section" id="pancake">
-  <div class="section-head">
-    <h2><span class="emoji">🥞</span> Pan Cakes</h2>
-    <span class="count">4 items</span>
-  </div>
+  <div class="section-head"><h2><span>🥞</span> Pan Cakes</h2><span class="count">4 items</span></div>
   <div class="items-grid">
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Banana Pan Cake</div><div class="price-block"><div class="price-final">₹78.75</div><div class="price-base">Base ₹75 + GST ₹3.75</div></div></div>
-      <div class="item-desc">Soft and fluffy banana pancake drizzled with honey for a naturally sweet treat.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Chocolate Pan Cake</div><div class="price-block"><div class="price-final">₹105</div><div class="price-base">Base ₹100 + GST ₹5</div></div></div>
-      <div class="item-desc">Delicious fluffy pancake blended with cocoa for rich chocolatey goodness.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Oats Pan Cake</div><div class="price-block"><div class="price-final">₹78.75</div><div class="price-base">Base ₹75 + GST ₹3.75</div></div></div>
-      <div class="item-desc">Healthy oats pancake made for a light and nutritious breakfast choice.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Ragi Pan Cake</div><div class="price-block"><div class="price-final">₹78.75</div><div class="price-base">Base ₹75 + GST ₹3.75</div></div></div>
-      <div class="item-desc">Wholesome ragi pancake packed with goodness for a healthy start to the day.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div>
-    </div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Banana Pan Cake</div><div class="price-final">₹78.75</div></div><div class="item-desc">Soft and fluffy banana pancake drizzled with honey for a naturally sweet treat.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Chocolate Pan Cake</div><div class="price-final">₹105</div></div><div class="item-desc">Delicious fluffy pancake blended with cocoa for rich chocolatey goodness.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Oats Pan Cake</div><div class="price-final">₹78.75</div></div><div class="item-desc">Healthy oats pancake made for a light and nutritious breakfast choice.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Ragi Pan Cake</div><div class="price-final">₹78.75</div></div><div class="item-desc">Wholesome ragi pancake packed with goodness for a healthy start to the day.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div></div>
   </div>
 </section>
-
 <div class="garage-divider"><span>///</span></div>
 
 <!-- AI SHAKES -->
 <section class="menu-section" id="shakes">
-  <div class="section-head">
-    <h2><span class="emoji">💪</span> AI Shakes</h2>
-    <span class="count">6 items · Nutrition-engineered</span>
-  </div>
+  <div class="section-head"><h2><span>💪</span> AI Shakes</h2><span class="count">6 items</span></div>
   <div class="items-grid">
-    <div class="item-card shake-card">
-      <div class="card-top"><div class="item-name">AI Lean Shake</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">A wholesome blend of oats, flax seeds, dates, banana and cinnamon — designed to keep you fuller for longer while supporting balanced nutrition.</div>
-      <div class="shake-best">Best for: Ages 25–45 · Weight Loss</div>
-      <div class="card-footer" style="margin-top:8px"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div>
-    </div>
-    <div class="item-card shake-card">
-      <div class="card-top"><div class="item-name">AI Muscle Boost Shake</div><div class="price-block"><div class="price-final">₹315</div><div class="price-base">Base ₹300 + GST ₹15</div></div></div>
-      <div class="item-desc">Loaded with whey protein, peanut butter, oats, banana, almonds and pumpkin seeds to support muscle growth and sustained energy.</div>
-      <div class="shake-best">Best for: Ages 18–35 · Muscle Gain</div>
-      <div class="card-footer" style="margin-top:8px"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div>
-    </div>
-    <div class="item-card shake-card">
-      <div class="card-top"><div class="item-name">AI Daily Energy Shake</div><div class="price-block"><div class="price-final">₹241.50</div><div class="price-base">Base ₹230 + GST ₹11.50</div></div></div>
-      <div class="item-desc">A rich blend of cold coffee, oats, peanut butter, dates, cashews and cocoa to help power busy mornings and demanding workdays.</div>
-      <div class="shake-best">Best for: Office Workers · Breakfast Replacement</div>
-      <div class="card-footer" style="margin-top:8px"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div>
-    </div>
-    <div class="item-card shake-card">
-      <div class="card-top"><div class="item-name">AI Immunity Power Shake</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">Packed with almonds, walnuts, pumpkin seeds, dates, honey and milk to provide essential nutrients for overall well-being.</div>
-      <div class="shake-best">Best for: Ages 35+ · Immunity Boost</div>
-      <div class="card-footer" style="margin-top:8px"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div>
-    </div>
-    <div class="item-card shake-card">
-      <div class="card-top"><div class="item-name">AI Kids Growth Shake</div><div class="price-block"><div class="price-final">₹210</div><div class="price-base">Base ₹200 + GST ₹10</div></div></div>
-      <div class="item-desc">A tasty combination of banana, dates, almond butter, oats, milk and cocoa crafted to support growing bodies and active minds.</div>
-      <div class="shake-best">Best for: Ages 10–18 · Growth & Development</div>
-      <div class="card-footer" style="margin-top:8px"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div>
-    </div>
-    <div class="item-card shake-card">
-      <div class="card-top"><div class="item-name">AI Senior Wellness Shake</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">Made with oats, flax seeds, almonds, dates and milk to provide balanced nourishment and support daily wellness.</div>
-      <div class="shake-best">Best for: Ages 50+ · Daily Wellness</div>
-      <div class="card-footer" style="margin-top:8px"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div>
-    </div>
+    <div class="item-card shake-card"><div class="card-top"><div class="item-name">AI Lean Shake</div><div class="price-final">₹157.50</div></div><div class="item-desc">A wholesome blend of oats, flax seeds, dates, banana and cinnamon — designed to keep you fuller for longer while supporting balanced nutrition.</div><div class="shake-best">Best for: Ages 25–45 · Weight Loss</div><div class="card-footer" style="margin-top:6px"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div></div>
+    <div class="item-card shake-card"><div class="card-top"><div class="item-name">AI Muscle Boost Shake</div><div class="price-final">₹315</div></div><div class="item-desc">Loaded with whey protein, peanut butter, oats, banana, almonds and pumpkin seeds to support muscle growth and sustained energy.</div><div class="shake-best">Best for: Ages 18–35 · Muscle Gain</div><div class="card-footer" style="margin-top:6px"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div></div>
+    <div class="item-card shake-card"><div class="card-top"><div class="item-name">AI Daily Energy Shake</div><div class="price-final">₹241.50</div></div><div class="item-desc">A rich blend of cold coffee, oats, peanut butter, dates, cashews and cocoa to help power busy mornings and demanding workdays.</div><div class="shake-best">Best for: Office Workers · Breakfast Replacement</div><div class="card-footer" style="margin-top:6px"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div></div>
+    <div class="item-card shake-card"><div class="card-top"><div class="item-name">AI Immunity Power Shake</div><div class="price-final">₹157.50</div></div><div class="item-desc">Packed with almonds, walnuts, pumpkin seeds, dates, honey and milk to provide essential nutrients for overall well-being.</div><div class="shake-best">Best for: Ages 35+ · Immunity Boost</div><div class="card-footer" style="margin-top:6px"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div></div>
+    <div class="item-card shake-card"><div class="card-top"><div class="item-name">AI Kids Growth Shake</div><div class="price-final">₹210</div></div><div class="item-desc">A tasty combination of banana, dates, almond butter, oats, milk and cocoa crafted to support growing bodies and active minds.</div><div class="shake-best">Best for: Ages 10–18 · Growth & Development</div><div class="card-footer" style="margin-top:6px"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div></div>
+    <div class="item-card shake-card"><div class="card-top"><div class="item-name">AI Senior Wellness Shake</div><div class="price-final">₹157.50</div></div><div class="item-desc">Made with oats, flax seeds, almonds, dates and milk to provide balanced nourishment and support daily wellness.</div><div class="shake-best">Best for: Ages 50+ · Daily Wellness</div><div class="card-footer" style="margin-top:6px"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div></div></div>
   </div>
 </section>
-
 <div class="garage-divider"><span>///</span></div>
 
 <!-- BEVERAGES -->
 <section class="menu-section" id="beverages">
-  <div class="section-head">
-    <h2><span class="emoji">☕</span> Beverages</h2>
-    <span class="count">8 items</span>
-  </div>
+  <div class="section-head"><h2><span>☕</span> Beverages</h2><span class="count">8 items</span></div>
   <div class="items-grid">
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Hot Coffee</div><div class="price-block"><div class="price-final">₹131.25</div><div class="price-base">Base ₹125 + GST ₹6.25</div></div></div>
-      <div class="item-desc">Freshly brewed hot coffee for the perfect energy boost.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge loaded" style="background:rgba(180,80,0,0.15);color:#d4813a">Hot</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Tea</div><div class="price-block"><div class="price-final">₹84</div><div class="price-base">Base ₹80 + GST ₹4</div></div></div>
-      <div class="item-desc">Freshly brewed tea served hot to refresh your mood.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge loaded" style="background:rgba(180,80,0,0.15);color:#d4813a">Hot</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Cold Coffee</div><div class="price-block"><div class="price-final">₹178.50</div><div class="price-base">Base ₹170 + GST ₹8.50</div></div></div>
-      <div class="item-desc">Refreshing chilled coffee blended to perfection.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge millet" style="background:rgba(60,100,180,0.12);color:#7aabdd">Cold</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Ice Filter Coffee</div><div class="price-block"><div class="price-final">₹157.50</div><div class="price-base">Base ₹150 + GST ₹7.50</div></div></div>
-      <div class="item-desc">Freshly brewed filter coffee poured over ice for a bold, smooth and refreshing South Indian coffee experience.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge millet" style="background:rgba(60,100,180,0.12);color:#7aabdd">Cold</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Mint Mojito</div><div class="price-block"><div class="price-final">₹105</div><div class="price-base">Base ₹100 + GST ₹5</div></div></div>
-      <div class="item-desc">Refreshing minty cooler made to refresh every sip.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge millet" style="background:rgba(60,100,180,0.12);color:#7aabdd">Cold</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Fresh Lime Mojito</div><div class="price-block"><div class="price-final">₹105</div><div class="price-base">Base ₹100 + GST ₹5</div></div></div>
-      <div class="item-desc">Fresh lime, mint and sparkling soda come together for the ultimate refreshing cooler.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge millet" style="background:rgba(60,100,180,0.12);color:#7aabdd">Cold</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Fresh Lime Soda</div><div class="price-block"><div class="price-final">₹105</div><div class="price-base">Base ₹100 + GST ₹5</div></div></div>
-      <div class="item-desc">Freshly squeezed lime blended with chilled soda for a crisp, tangy and refreshing sip.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge millet" style="background:rgba(60,100,180,0.12);color:#7aabdd">Cold</span></div>
-    </div>
-    <div class="item-card">
-      <div class="card-top"><div class="item-name">Cold Drinks (Packaged)</div><div class="price-block"><div class="price-final">₹31.50</div><div class="price-base">Base ₹30 + GST ₹1.50</div></div></div>
-      <div class="item-desc">Your favorite chilled soft drink served ice cold.</div>
-      <div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge millet" style="background:rgba(60,100,180,0.12);color:#7aabdd">Cold</span></div>
-    </div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Hot Coffee</div><div class="price-final">₹131.25</div></div><div class="item-desc">Freshly brewed hot coffee for the perfect energy boost.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge hot">Hot</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Tea</div><div class="price-final">₹84</div></div><div class="item-desc">Freshly brewed tea served hot to refresh your mood.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge hot">Hot</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Cold Coffee</div><div class="price-final">₹178.50</div></div><div class="item-desc">Refreshing chilled coffee blended to perfection.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge cold">Cold</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Ice Filter Coffee</div><div class="price-final">₹157.50</div></div><div class="item-desc">Freshly brewed filter coffee poured over ice for a bold, smooth and refreshing South Indian coffee experience.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge cold">Cold</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Mint Mojito</div><div class="price-final">₹105</div></div><div class="item-desc">Refreshing minty cooler made to refresh every sip.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge cold">Cold</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Fresh Lime Mojito</div><div class="price-final">₹105</div></div><div class="item-desc">Fresh lime, mint and sparkling soda come together for the ultimate refreshing cooler.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge cold">Cold</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Fresh Lime Soda</div><div class="price-final">₹105</div></div><div class="item-desc">Freshly squeezed lime blended with chilled soda for a crisp, tangy and refreshing sip.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge cold">Cold</span></div></div>
+    <div class="item-card"><div class="card-top"><div class="item-name">Cold Drinks (Packaged)</div><div class="price-final">₹31.50</div></div><div class="item-desc">Your favorite chilled soft drink served ice cold.</div><div class="card-footer"><div class="veg-badge veg"><div class="dot veg"></div>Veg</div><span class="tag-badge cold">Cold</span></div></div>
   </div>
 </section>
 
 </main>
 
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">THE CRAVE GARAGE</div>
-  <p>Cloud Kitchen · <a href="http://thecravegarage.in">thecravegarage.in</a></p>
-  <div class="legend">
-    <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;border:1.5px solid #56C568;background:#56C568;margin-right:4px"></span>Pure Veg</span>
-    <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;border:1.5px solid #FF3D00;background:#FF3D00;margin-right:4px"></span>Non-Veg</span>
-    <span>All prices inclusive of GST</span>
+  <div class="footer-top">
+
+    <!-- Brand + FSSAI -->
+    <div class="footer-col">
+      <div class="footer-brand">
+        <img class="footer-logo-img" src="WhiteLogo_WithoutText.png" alt="The Crave Garage" onerror="this.style.display='none'">
+        <div class="footer-brand-text">The Crave<br><span>Garage</span></div>
+      </div>
+      <div class="footer-tagline">"Fix Your Cravings Here"</div>
+      <div class="fssai-box">
+        <strong>🛡️ FSSAI Licensed</strong><br>
+        License No: <span id="fssai-no">XXXXXXXXXXXX</span><br>
+        Cloud Kitchen · Comfort Food. Smart Choices.
+      </div>
+    </div>
+
+    <!-- Social -->
+    <div class="footer-col">
+      <h4>Follow Us</h4>
+      <div class="social-links">
+        <a class="social-link" href="https://instagram.com/thecravegarage" target="_blank">
+          <div class="social-icon ig-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </div>
+          @thecravegarage
+        </a>
+        <a class="social-link" href="https://facebook.com/thecravegarage" target="_blank">
+          <div class="social-icon fb-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </div>
+          The Crave Garage
+        </a>
+        <a class="social-link" href="https://g.page/thecravegarage" target="_blank">
+          <div class="social-icon gb-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.25 17.292l-4.5-4.364 1.857-1.858 2.643 2.506 5.643-5.784 1.857 1.857-7.5 7.643z" fill="#4285F4"/></svg>
+          </div>
+          Google Business
+        </a>
+        <a class="social-link" href="https://wa.me/91XXXXXXXXXX" target="_blank">
+          <div class="social-icon wa-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          WhatsApp Us
+        </a>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <div class="contact-list">
+        <div class="contact-item">
+          <span class="ci">📞</span>
+          <div>
+            <strong>Phone / WhatsApp</strong>
+            <a href="tel:+91XXXXXXXXXX">+91 XXXXX XXXXX</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="ci">📧</span>
+          <div>
+            <strong>Email</strong>
+            <a href="mailto:hello@thecravegarage.in">hello@thecravegarage.in</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="ci">🌐</span>
+          <div>
+            <strong>Website</strong>
+            <a href="http://thecravegarage.in" target="_blank">thecravegarage.in</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="ci">🕐</span>
+          <div>
+            <strong>Hours</strong>
+            Mon–Sun · 9:00 AM – 10:00 PM
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="ci">📍</span>
+          <div>
+            <strong>Location</strong>
+            Cloud Kitchen · Delivery Only
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
-  <p style="margin-top:10px;font-size:11px">FSSAI Licensed · Cloud Kitchen</p>
+
+  <div class="footer-bottom">
+    <div class="legend">
+      <span><span class="l-dot" style="background:#56C568"></span> Pure Veg</span>
+      <span><span class="l-dot" style="background:#FF3D00"></span> Non-Veg</span>
+      <span>All prices incl. GST</span>
+    </div>
+    <div class="footer-copy">© 2025 The Crave Garage. All rights reserved.</div>
+  </div>
 </footer>
 
+<!-- FLOATING WHATSAPP -->
 <a class="wa-float" href="https://wa.me/91XXXXXXXXXX?text=Hi%2C%20I'd%20like%20to%20order%20from%20The%20Crave%20Garage!" target="_blank">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   Order Now
