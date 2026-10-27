@@ -23,8 +23,14 @@ header{position:sticky;top:0;z-index:200;background:rgba(15,14,13,0.97);backdrop
 .order-btn svg{width:15px;height:15px}
 
 /* BANNER */
-.hero-banner{width:100%;display:block;aspect-ratio:16/5;object-fit:cover;max-height:320px}
-@media(max-width:600px){.hero-banner{aspect-ratio:16/9;max-height:220px}}
+.hero-banner{
+  width:100%;display:block;
+  aspect-ratio:16/5;
+  max-height:320px;
+}
+@media(max-width:600px){
+  .hero-banner{aspect-ratio:16/9;max-height:220px}
+}
 
 /* PRICE NOTE */
 .price-note{background:rgba(255,106,0,0.08);border-bottom:1px solid rgba(255,106,0,0.15);padding:9px 1.25rem;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.5px;color:#c47a3a;display:flex;align-items:center;gap:8px}
